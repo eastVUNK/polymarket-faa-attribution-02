@@ -2,6 +2,16 @@
 
 Entry for make.fun bounty polymarket-faa-attribution-02 (program/v1).
 
+DESIGN (frozen at Stage 3, 2026-11-14; see STAGE3.md): persistence median
++ recentered 24h empirical quantiles, shrink 0.60. Jump-stress verdict:
+wider bands only win if 12-15% of final minutes are displaced, while a
+realistic final has 1-3 news jumps, ~2-6% of minutes (the median resets
+at each 4h checkpoint), so 0.60 is kept. No drift (catastrophic on
+practice, 0.65 vs 0.35), no sum-to-1 renorm (the four FAA markets are
+independent, unlike the mutually exclusive NVIDIA candidates), no
+house-band floor (+0.05 practice cost). Local practice pinball 0.345950
+vs house baseline 0.392518; coverage 0.8646.
+
 Method (v1): persistence median + empirical per-horizon spread.
   - Median: the market's last price at the checkpoint. Short-horizon
     prediction-market prices are close to a martingale: on the practice
